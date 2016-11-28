@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title></title>
+
+    <link rel="manifest" href="manifest.json">
+
+    <!-- un-comment this code to enable service worker
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('service-worker.js')
+          .then(() => console.log('service worker installed'))
+          .catch(err => console.log('Error', err));
+      }
+    </script>-->
+
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+
+    <!-- ionic/angularjs js -->
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+
+    <script type="text/javascript" src="js/ng-cordova.min.js"></script>
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="cordova.js"></script>
+
+    <script type="text/javascript" src="js/caman.full.min.js"></script>
+
+    <!-- your app's js -->
+    <script src="js/app.js"></script>
+    <script type="text/javascript" src="js/image-util.js"></script>
+    <script type="text/javascript" src="js/file-util.js"></script>
+  </head>
+  <body ng-app="starter" class="platform-android platform-cordova platform-webview">
+
+    <ion-pane>
+      <ion-header-bar class="bar-stable">
+        <h1 class="title">Ionic Photo</h1>
+      </ion-header-bar>
+      
+      <ion-tabs class="tabs-color-assertive tabs-striped">
+
+        <ion-tab title="Home" icon="ion-home" ng-controller="HomeController">
+          <ion-view>
+            <ion-content>
+              <h1>Home</h1>
+
+            </ion-content>
+          </ion-view>
+        </ion-tab>
+
+        <ion-tab title="Camera" icon="ion-ios-camera" ng-controller="CameraController" on-select="onTabSelect()">
+          <ion-view>
+            <ion-content>
+              <div class="card" ng-if="imageCamera != undefined">
+                <div class="item item-image">
+                  <button class="button icon-left ion-heart" ng-click="onSave()">Click to save</button>
+                </div>
+                <div class="item item-image">
+                  <img class="image-filter" ng-src="{{imageCamera}}" id="imageCamera" />
+                </div>                
+              </div>
+
+            </ion-content>            
+            <filter-bar></filter-bar>
+          </ion-view>
+        </ion-tab>
+
+        <ion-tab title="Galeria" icon="ion-images" ng-controller="GalleryController" on-select="onTabSelect()">
+          <ion-view>
+            <ion-content>
+              <div class="card" ng-if="imageGallery != undefined">
+                <div class="item item-image">
+                  <img class="image-filter" ng-src="{{imageGallery}}" id="imageGallery" />
+                </div>
+              </div>              
+            </ion-content>
+            <filter-bar></filter-bar>
+          </ion-view>
+        </ion-tab>
+        
+      </ion-tabs>
+
+    </ion-pane>
+  </body>
+</html>
